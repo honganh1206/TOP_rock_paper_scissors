@@ -8,50 +8,32 @@ function playRPS (playerSelection, computerSelection):
     Input from player (choose only 1 of 3)
     computerSelection = return value from computerPLay
     condition:
-        switch player:
-            case rock:
-                if computer = paper:
-                    player lose
-                else if computer = scissor:
-                    player win
-                else if computer = rock:
-                    tie
-                else:
-                    invalid
-            case paper:
-                if computer = paper:
-                    tie
-                else if computer = scissor:
-                    player lose
-                else if computer = rock:
-                    win
-                else:
-                    invalid
-            case scissor:
-                if computer = paper:
-                    player win
-                else if computer = scissor:
-                    player tie
-                else if computer = rock:
-                    lose
-                else:
-                    invalid
-
+        if player wins => row += 1 and playerScore +=1
+        vice versa
+        tie => round += 1
+    
+        announce the winner
 */
 
+//constants
 const ROUNDS = 5;
 const CHOICES = ["Rock", "Paper", "Scissor"];
 const RESULT = ["Computer", "Player", "Tie"];
 
+//global vars
 var row = 0;
 var playerScore = 0;
 var computerScore = 0;
 
+// Main execution
+game();
 
+//functions
 function computerPlay () {
     let choice = CHOICES[Math.floor(Math.random()*CHOICES.length)];
     return choice;
 }
+
 function capitalizeChoice(playerSelection) {
     let capChoice = playerSelection.toLowerCase();
     capChoice = capChoice.charAt(0).toUpperCase() + capChoice.substring(1);
@@ -93,7 +75,7 @@ function game(){
         if (winner == RESULT[0]) {
             computerScore += 1;
             row += 1;
-            console.log("Round", row, winner);
+            console.log("Round", row, winner, "won this row");
             if (computerScore > playerScore && row == 5) {
                 console.log(winner, "wins the game.");
                 break;
@@ -102,7 +84,7 @@ function game(){
         if (winner == RESULT[1]) {
             playerScore += 1;
             row += 1;
-            console.log("Round", row, winner);
+            console.log("Round", row, winner, "won this row");
             if (playerScore > computerScore && row == 5) {
                 console.log(winner, "wins the game.");
                 break;
@@ -110,10 +92,19 @@ function game(){
         }
         if (winner == RESULT[2]) {
             row += 1;
-            console.log("It was a tie.");
+            console.log("Round", row, "was a tie.");
             // CAlculate the score
-            break;
+            if (row == 5) {
+                if (playerScore > computerScore) {
+                    console.log("Player wins the game.")
+                    break;
+                }
+                if (computerScore > playerScore) {
+                    console.log("Computer wins the game.")
+                    break;
+                }
+            }
         }
     }
 }
-game();
+

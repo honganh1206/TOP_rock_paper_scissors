@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-darkreader-mode="dynamic" data-darkreader-scheme="dark" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,11 +44,19 @@
     </main>
     <footer class="footer">
         <p>
-            Copyright © 2022 honganh1206
+            Copyright © 
+            <script>
+                document.write(new Date().getFullYear())
+              </script> 
+            honganh1206
         </p>
     </footer>
-    <div id="endGameModal" class="modal">
-        <p id="endGameMsg" class="modal-title">You lost...</p>
+    <div id="endGameModal" class="modal active">
+        <p id="endGameMsg" class="modal-title-lose">You lost...</p>
+        <button id="restartBtn" class="btn btn-restart">Play again?</button>
+    </div>
+    <div id="endGameModal" class="modal active">
+        <p id="endGameMsg" class="modal-title-win">You won!</p>
         <button id="restartBtn" class="btn btn-restart">Play again?</button>
     </div>
     <!--<script src="RPS.js"></script> -->

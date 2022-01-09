@@ -4,12 +4,12 @@ html {
     min-height: 100%;
   }
   
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;}
+*,
+*::before,
+*::after {
+box-sizing: border-box;
+padding: 0;
+margin: 0;}
 
 header {
     display: flex;
@@ -64,7 +64,8 @@ body {
 button {
     border-color: currentColor;
     outline-color: currentColor;
-
+    font-size: inherit;
+    color: inherit;
 }
 .btn {
     background-color: #4a4f57;
@@ -73,6 +74,13 @@ button {
     width: 150px;
     height: 150px;
     border-radius: 10px;
+
+}
+.btn-restart {
+    background-color: #1b2027;
+    padding: 10px 20px;
+    margin-top: 25px;
+    margin-bottom: 15px;
 }
 .sign {
     font-size: 100px;
@@ -88,6 +96,7 @@ button {
 }
 
 .modal {
+    background-color: #4a4f57;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -100,4 +109,12 @@ button {
     z-index: 1;
     user-select: none;
     transition: 200ms ease-in-out;
+}
+.modal.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+.modal-title-win,
+.modal-title-lose {
+    font-size: 40px;
+    font-weight: bold;
 }

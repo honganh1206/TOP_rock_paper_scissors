@@ -15,15 +15,15 @@ function playRPS (playerSelection, computerSelection):
         announce the winner
 */
 
+// GAME
+
 //constants
-const ROUNDS = 5;
 const CHOICES = ["Rock", "Paper", "Scissor"];
 const RESULT = ["Computer", "Player", "Tie"];
 
 //global vars
-var row = 0;
-var playerScore = 0;
-var computerScore = 0;
+let playerScore = 0;
+let computerScore = 0;
 
 // Main execution
 game();
@@ -67,44 +67,45 @@ function playGame(playerSelection, computerSelection) {
 }
 
 function game(){
-    while (row < ROUNDS){
+    while (true){
         let playerSelection = prompt("Enter your choice:");
         playerSelection = capitalizeChoice(playerSelection);
         let computerSelection = computerPlay();
         let winner = playGame(playerSelection, computerSelection);
         if (winner == RESULT[0]) {
             computerScore += 1;
-            row += 1;
+
             console.log("Round", row, winner, "won this row");
-            if (computerScore > playerScore && row == 5) {
+            if (computerScore == 5 || playerScore == 5) {
                 console.log(winner, "wins the game.");
                 break;
             }
         }
         if (winner == RESULT[1]) {
             playerScore += 1;
-            row += 1;
             console.log("Round", row, winner, "won this row");
-            if (playerScore > computerScore && row == 5) {
+            if (playerScore == 5 || computerScore == 5) {
                 console.log(winner, "wins the game.");
                 break;
             }
         }
         if (winner == RESULT[2]) {
-            row += 1;
             console.log("Round", row, "was a tie.");
-            // CAlculate the score
-            if (row == 5) {
-                if (playerScore > computerScore) {
-                    console.log("Player wins the game.")
-                    break;
-                }
-                if (computerScore > playerScore) {
-                    console.log("Computer wins the game.")
-                    break;
-                }
-            }
         }
     }
 }
 
+//UI
+const scoreInfo = document.getElementById('scoreInfo')
+const rule = document.getElementById('rule')
+const playerScorePara = document.getElementById('playerScore')
+const computerScorePara = document.getElementById('computerScore')
+const playerSelection = document.getElementById('playerSeleciton')
+const computerSelection = document.getElementById('computerSelection')
+const rockBtn = document.getElementById('rockBtn')
+const paperBtn = document.getElementById('paperBtn')
+const scissorsBtn = document.getElementById('scissorsBtn')
+const endGameModal = document.getElementById('endGameModal')
+const endgameMsg = document.getElementById('endGameMsg')
+const overlay = document.getElementById('overlay')
+const restartBtn = document.getElementById('restartBtn')

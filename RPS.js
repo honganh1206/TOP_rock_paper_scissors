@@ -24,9 +24,9 @@ const RESULT = ["Computer", "Player", "Tie"];
 //global vars
 let playerScore = 0;
 let computerScore = 0;
-
+let roundWinner = '';
 // Main execution
-game();
+// game();
 
 //functions
 function computerPlay () {
@@ -34,13 +34,13 @@ function computerPlay () {
     return choice;
 }
 
-function capitalizeChoice(playerSelection) {
-    let capChoice = playerSelection.toLowerCase();
-    capChoice = capChoice.charAt(0).toUpperCase() + capChoice.substring(1);
-    return capChoice;
-}
+// function capitalizeChoice(playerSelection) {
+//     let capChoice = playerSelection.toLowerCase();
+//     capChoice = capChoice.charAt(0).toUpperCase() + capChoice.substring(1);
+//     return capChoice;
+// }
 
-function playGame(playerSelection, computerSelection) {
+function playRound(playerSelection, computerSelection) {
     if (playerSelection !== computerSelection) {
         if (playerSelection == CHOICES[0] && computerSelection == CHOICES [1]) {
             return RESULT[0];
@@ -66,42 +66,17 @@ function playGame(playerSelection, computerSelection) {
     }
 }
 
-function game(){
-    while (true){
-        let playerSelection = prompt("Enter your choice:");
-        playerSelection = capitalizeChoice(playerSelection);
-        let computerSelection = computerPlay();
-        let winner = playGame(playerSelection, computerSelection);
-        if (winner == RESULT[0]) {
-            computerScore += 1;
 
-            console.log("Round", row, winner, "won this row");
-            if (computerScore == 5 || playerScore == 5) {
-                console.log(winner, "wins the game.");
-                break;
-            }
-        }
-        if (winner == RESULT[1]) {
-            playerScore += 1;
-            console.log("Round", row, winner, "won this row");
-            if (playerScore == 5 || computerScore == 5) {
-                console.log(winner, "wins the game.");
-                break;
-            }
-        }
-        if (winner == RESULT[2]) {
-            console.log("Round", row, "was a tie.");
-        }
-    }
-}
 
 //UI
+
+// define vars
 const scoreInfo = document.getElementById('scoreInfo')
 const rule = document.getElementById('rule')
 const playerScorePara = document.getElementById('playerScore')
 const computerScorePara = document.getElementById('computerScore')
-const playerSelection = document.getElementById('playerSeleciton')
-const computerSelection = document.getElementById('computerSelection')
+const playerSign = document.getElementById('playerSeleciton')
+const computerSign = document.getElementById('computerSelection')
 const rockBtn = document.getElementById('rockBtn')
 const paperBtn = document.getElementById('paperBtn')
 const scissorsBtn = document.getElementById('scissorsBtn')
@@ -109,3 +84,106 @@ const endGameModal = document.getElementById('endGameModal')
 const endgameMsg = document.getElementById('endGameMsg')
 const overlay = document.getElementById('overlay')
 const restartBtn = document.getElementById('restartBtn')
+
+// Interactivity => Buttons handle functions
+rockBtn.addEventListener('click', () => handleClick(CHOICES[0]))
+paperBtn.addEventListener('click', () => handleClick(CHOICES[1]))
+scissorBtn.addEventListener('click', () => handleClick(CHOICES[2]))
+restartBtn.addEventListener('click', restartGame)
+overlay.addEventListener('click', closeEndgameModal)
+
+// function playGame(){
+//     while (true){
+//         let playerSelection = prompt("Enter your choice:");
+//         playerSelection = capitalizeChoice(playerSelection);
+//         let computerSelection = computerPlay();
+//         let winner = playGame(playerSelection, computerSelection);
+//         if (winner == RESULT[0]) {
+//             computerScore += 1;
+
+//             console.log("Round", row, winner, "won this row");
+//             if (gameOver()) {
+//                 console.log(winner, "wins the game.");
+//                 break;
+//             }
+//         }
+//         if (winner == RESULT[1]) {
+//             playerScore += 1;
+//             console.log("Round", row, winner, "won this row");
+//             if (gameOver()) {
+//                 console.log(winner, "wins the game.");
+//                 break;
+//             }
+//         }
+//         if (winner == RESULT[2]) {
+//             console.log("Round", row, "was a tie.");
+//         }
+//     }
+// }
+
+function gameOver (){
+    return computerScore == 5 || playerScore == 5;
+}
+
+function handleClick(playerSelection) {
+    // check if game ends, otherwise continue
+    if (gameOver()) {
+        openEndgameModal();
+        return;
+    }
+    
+    const computerSelection =  computerPlay(); // why const here? 
+    playRound(playerSelection, computerSelection);
+    updateChoices(playerSelection, computerSelection);
+    updateScore();
+
+    if (gameOver()) {
+        openEndgameModal();
+        setFinalMessage(); // show result in the modal
+    }
+}
+
+// show choices of both player and computer on the UI
+function updateChoices(playerSeleciton, computerSelection) {
+    switch (playerSelection) {
+        case CHOICES[0]:
+            playerSign.textContent = '🪨';
+            break;
+        case CHOICES[1]:
+            playerSign.textContent = '🧻';
+            break;
+        case CHOICES[2]:
+            playerSign.textContent = '✂️';
+            break;
+    }
+
+    switch (computerSelection) {
+        case CHOICES[0]:
+            computerSign.textContent = '🪨';
+            break;
+        case CHOICES[1]:
+            computerSign.textContent = '🧻';
+            break;
+        case CHOICES[2]:
+            computerSign.textContent = '✂️';
+            break;
+    }
+}
+//  show winner + update score after each round
+function updateScore() {
+    if (roundWinner === RESULT[2]) {
+        scoreInfo.textContent = "It's a tie!";
+    }
+    else if (roundWinner === RESULT[1]) {
+        scoreInfo.textContent = 'You won this round!';
+    }
+    else if (roundWinner === RESULT[0]) {
+        scoreInfo.textContent = 'Computer won this round.'
+    }
+
+    playerScorePara.textContent = `Player: ${playerScore}`;
+    computerScorePara.textContent = `Computer: ${computerScore}`;
+
+}
+
+

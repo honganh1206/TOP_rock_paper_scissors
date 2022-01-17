@@ -34,11 +34,11 @@ function computerPlay () {
     return choice;
 }
 
-// function capitalizeChoice(playerSelection) {
-//     let capChoice = playerSelection.toLowerCase();
-//     capChoice = capChoice.charAt(0).toUpperCase() + capChoice.substring(1);
-//     return capChoice;
-// }
+function capitalizeChoice(playerSelection) {
+    let capChoice = playerSelection.toLowerCase();
+    capChoice = capChoice.charAt(0).toUpperCase() + capChoice.substring(1);
+    return capChoice;
+}
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection !== computerSelection) {
@@ -79,7 +79,7 @@ const playerSign = document.getElementById('playerSeleciton')
 const computerSign = document.getElementById('computerSelection')
 const rockBtn = document.getElementById('rockBtn')
 const paperBtn = document.getElementById('paperBtn')
-const scissorsBtn = document.getElementById('scissorsBtn')
+const scissorBtn = document.getElementById('scissorBtn')
 const endGameModal = document.getElementById('endGameModal')
 const endgameMsg = document.getElementById('endGameMsg')
 const overlay = document.getElementById('overlay')
@@ -144,17 +144,17 @@ function handleClick(playerSelection) {
 }
 
 // show choices of both player and computer on the UI
-function updateChoices(playerSeleciton, computerSelection) {
+function updateChoices(playerSelection, computerSelection) {
     switch (playerSelection) {
         case CHOICES[0]:
-            playerSign.textContent = '🪨';
-            break;
+            playerSign.textContent = '🪨'
+            break
         case CHOICES[1]:
-            playerSign.textContent = '🧻';
-            break;
+            playerSign.textContent = '🧻'
+            break
         case CHOICES[2]:
-            playerSign.textContent = '✂️';
-            break;
+            playerSign.textContent = '✂️'
+            break
     }
 
     switch (computerSelection) {
@@ -185,5 +185,54 @@ function updateScore() {
     computerScorePara.textContent = `Computer: ${computerScore}`;
 
 }
+
+function updateScoreMessage (winner, playerSelection, computerSelection) {
+    if (winner == RESULT[1]) {
+        rule.textContent = `${capitalizeChoice(playerSelection)} 
+        beats ${computerSelection.toLowerCase()}`;
+        return;
+    }
+    if (winner == RESULT[0]) {
+        rule.textContent = `${capitalizeChoice(playerSelection)} 
+        is beaten by ${computerSelection.toLowerCase()}`;
+        return;
+    }
+    rule.textContent = `${capitalizeChoice(playerSelection)} 
+    ties with by ${computerSelection.toLowerCase()}`;
+}
+
+// turn on/off modal + blur blackground
+function openEndgameModal() {
+    endGameModal.classList.add('active');
+    overlay.classList.add('active');
+}
+function closeEndgameModal() {
+    endGameModal.classList.remove('active');
+    overlay.classList.remove('active');
+}
+
+function setFinalMessage() {
+    //complex if structure
+    return playerScore > computerScore 
+        ? (endgameMsg.textContent = 'You won!') // if true
+        : (endgameMsg.textContent = 'You lost...') // else
+}
+
+function restartGame() {
+    playerScore = 0;
+    computerScore = 0;
+    scoreInfo.textContent = 'Your move';
+    rule.textContent = 'After 5 rows, either you or the computer wins.';
+    playerScorePara.textContent = 'Player: 0';
+    computerScorePara.textContent = 'Computer: 0';
+    playerSign.textContent = '❔';
+    computerSign.textContent = '❔';
+    endgameModal.classList.remove('active');
+    overlay.classList.remove('active');
+}
+
+
+
+
 
 

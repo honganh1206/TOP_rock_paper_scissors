@@ -94,6 +94,8 @@ button {
     align-items: center;
     width: 100%;
     font-size: 22px;
+    gap: 10px;
+    padding: 10px;
 }
 
 .modal {
@@ -109,13 +111,13 @@ button {
     /* no idea what these are */
     z-index: 1;
     user-select: none;
+    transform: translate(-50%, -50%) scale(0);
     transition: 200ms ease-in-out;
 }
 .modal.active {
     transform: translate(-50%, -50%) scale(1);
 }
-.modal-title-win,
-.modal-title-lose {
+.modal-title {
     font-size: 40px;
     font-weight: bold;
 }
@@ -128,4 +130,7 @@ button {
     width: 100%;
     height: 100%;
     opacity: 0.5;
+}
+.overlay.active {
+    display: block;
 }

@@ -43,21 +43,27 @@ function capitalizeChoice(playerSelection) {
 function playRound(playerSelection, computerSelection) {
     if (playerSelection !== computerSelection) {
         if (playerSelection == CHOICES[0] && computerSelection == CHOICES [1]) {
+            computerScore++;
             return RESULT[0];
         }
         else if (playerSelection == CHOICES[0] && computerSelection == CHOICES [2]) {
+            playerScore++;
             return RESULT[1];
         }
         if (playerSelection == CHOICES[1] && computerSelection == CHOICES [2]) {
+            computerScore++;
             return RESULT[0];
         }
         else if (playerSelection == CHOICES[1] && computerSelection == CHOICES [0]) {
+            playerScore++;
             return RESULT[1];
         }
         if (playerSelection == CHOICES[2] && computerSelection == CHOICES [0]) {
+            computerScore++;
             return RESULT[0];
         }
         else if (playerSelection == CHOICES[2] && computerSelection == CHOICES [1]) {
+            playerScore++;
             return RESULT[1];
         }
     }
@@ -75,12 +81,12 @@ const scoreInfo = document.getElementById('scoreInfo')
 const rule = document.getElementById('rule')
 const playerScorePara = document.getElementById('playerScore')
 const computerScorePara = document.getElementById('computerScore')
-const playerSign = document.getElementById('playerSeleciton')
+const playerSign = document.getElementById('playerSelection')
 const computerSign = document.getElementById('computerSelection')
 const rockBtn = document.getElementById('rockBtn')
 const paperBtn = document.getElementById('paperBtn')
 const scissorBtn = document.getElementById('scissorBtn')
-const endGameModal = document.getElementById('endGameModal')
+const endgameModal = document.getElementById('endGameModal')
 const endgameMsg = document.getElementById('endGameMsg')
 const overlay = document.getElementById('overlay')
 const restartBtn = document.getElementById('restartBtn')
@@ -145,7 +151,7 @@ function handleClick(playerSelection) {
 
 // show choices of both player and computer on the UI
 function updateChoices(playerSelection, computerSelection) {
-    switch (playerSelection) {
+    switch (playerSelection) { 
         case CHOICES[0]:
             playerSign.textContent = '🪨'
             break
@@ -203,11 +209,11 @@ function updateScoreMessage (winner, playerSelection, computerSelection) {
 
 // turn on/off modal + blur blackground
 function openEndgameModal() {
-    endGameModal.classList.add('active');
+    endgameModal.classList.add('active');
     overlay.classList.add('active');
 }
 function closeEndgameModal() {
-    endGameModal.classList.remove('active');
+    endgameModal.classList.remove('active');
     overlay.classList.remove('active');
 }
 
@@ -221,7 +227,7 @@ function setFinalMessage() {
 function restartGame() {
     playerScore = 0;
     computerScore = 0;
-    scoreInfo.textContent = 'Your move';
+    scoreInfo.textContent = 'Your move:';
     rule.textContent = 'After 5 rows, either you or the computer wins.';
     playerScorePara.textContent = 'Player: 0';
     computerScorePara.textContent = 'Computer: 0';

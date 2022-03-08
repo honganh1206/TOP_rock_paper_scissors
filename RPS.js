@@ -72,7 +72,7 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-
+// Just a comment to practice merging branches
 
 //UI
 

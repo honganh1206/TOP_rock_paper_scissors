@@ -1,62 +1,65 @@
 <!DOCTYPE html>
 <html data-darkreader-mode="dynamic" data-darkreader-scheme="dark" lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 🕹️ Rock Paper Scissors</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> 🕹️ Rock Paper Scissors</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <header>
-        <h1 class="title">ROCK 🪨 PAPER 🧻 SCISSORS ✂️</h1>
-    </header>
-    <main class="main">
-        <div class="scoreboard">
-            <h2 id="rule" class="rule">
-                After 5 rows, either you or the computer wins.
-            </h2>
-            <h3 id ="scoreInfo" class="score-info">
-                Your move:  
-            </h2>
-            <div class="score-container">
-                <div class="score-box">
-                    <div id="playerSelection" class="selection">❔</div>
-                    <p id="playerScore" class="score">Player: 0</p>
-                </div>
-                <div class="score-box">
-                    <div id="computerSelection" class="selection">❔</div>
-                    <p id="computerScore" class="score">Computer: 0</p>
-                </div>
-            </div>
+  <header>
+    <h1 class="title">ROCK 🪨 PAPER 🧻 SCISSORS ✂️</h1>
+  </header>
+  <main class="main">
+    <div class="scoreboard">
+      <h2 id="rule" class="rule">
+        After 5 rows, either you or the computer wins.
+      </h2>
+      <h3 id="scoreInfo" class="score-info">
+        Your move:
+        </h2>
+        <div class="score-container">
+          <div class="score-box">
+            <div id="playerSelection" class="selection">❔</div>
+            <p id="playerScore" class="score">Player: 0</p>
+          </div>
+          <div class="score-box">
+            <div id="computerSelection" class="selection">❔</div>
+            <p id="computerScore" class="score">Computer: 0</p>
+          </div>
         </div>
-        <div class="buttons">
-            <button id="rockBtn" class="btn btn-square">
-                <div class="sign">🪨</div>
-            </button>
-            <button id="paperBtn" class="btn btn-square">
-                <div class="sign">🧻</div>
-            </button>
-            <button id="scissorBtn" class="btn btn-square">
-                <div class="sign">✂️</div>
-            </button>
-        </div>
-    </main>
-    <footer class="footer">
-        <p>
-            Copyright © 
-            <script>
-                document.write(new Date().getFullYear())
-              </script> 
-            honganh1206
-        </p>
-    </footer>
-    <div id="endGameModal" class="modal">
-        <p id="endGameMsg" class="modal-title"></p>
-        <button id="restartBtn" class="btn btn-restart">Play again?</button>
     </div>
-    <div id="overlay" class="overlay"></div>
-    <script src="RPS.js"></script>
+    <div class="buttons">
+      <button id="rockBtn" class="btn btn-square">
+        <div class="sign">🪨</div>
+      </button>
+      <button id="paperBtn" class="btn btn-square">
+        <div class="sign">🧻</div>
+      </button>
+      <button id="scissorBtn" class="btn btn-square">
+        <div class="sign">✂️</div>
+      </button>
+    </div>
+  </main>
+  <footer class="footer">
+    <p>
+      Copyright ©
+      <script>
+        document.write(new Date().getFullYear())
+      </script>
+      honganh1206
+    </p>
+  </footer>
+  <div id="endGameModal" class="modal">
+    <p id="endGameMsg" class="modal-title"></p>
+    <button id="restartBtn" class="btn btn-restart">Play again?</button>
+  </div>
+  <div id="overlay" class="overlay"></div>
+  <script src="RPS.js"></script>
 </body>
+<!--Just  a comment to practice merging branches-->
 
 </html>
